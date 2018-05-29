@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+
+<body>
+    <h1>{{title}}</h1>
+
+    <h3>Employee</h3>
+
+    <hr />
+
+    <form [formGroup]="employeeForm" (ngSubmit)="save()" #formDir="ngForm" novalidate>
+
+        <div class="form-group row">
+            <label class=" control-label col-md-12" for="empno">EmpNo</label>
+            <div class="col-md-4">
+                <input class="form-control" type="text" formControlName="empno">
+            </div>
+            <span class="text-danger" *ngIf="employeeForm.hasError('required', 'empno') && formDir.submitted">
+                EmpNo is required.
+            </span>
+        </div>
+
+        <div class="form-group row">
+            <label class=" control-label col-md-12" for="Ename">Ename</label>
+            <div class="col-md-4">
+                <input class="form-control" type="text" formControlName="ename">
+            </div>
+            <span class="text-danger" *ngIf="employeeForm.hasError('required', 'ename') && formDir.submitted">
+                Name is required.
+            </span>
+        </div>
+
+        <div class="form-group row">
+            <label class=" control-label col-md-12" for="Job">Job</label>
+            <div class="col-md-4">
+                <input class="form-control" type="text" formControlName="job">
+            </div>
+            <span class="text-danger" *ngIf="employeeForm.hasError('required', 'job') && formDir.submitted">
+                Job is required.
+            </span>
+        </div>
+
+        <div class="form-group row">
+            <label class=" control-label col-md-12" for="Mgr">Mgr</label>
+            <div class="col-md-4">
+                <input class="form-control" type="text" formControlName="mgr">
+            </div>
+            <span class="text-danger" *ngIf="employeeForm.hasError('required', 'mgr') && formDir.submitted">
+                Mgr is required.
+            </span>
+        </div>
+
+        <div class="form-group row">
+            <label class=" control-label col-md-12" for="Hiredate">Hiredate</label>
+            <div class="col-md-4">
+                <input class="form-control" type="text" formControlName="hiredate">
+            </div>
+            <span class="text-danger" *ngIf="employeeForm.hasError('required', 'hiredate') && formDir.submitted">
+                Name is required.
+            </span>
+        </div>
+
+        <div class="form-group row">
+            <label class=" control-label col-md-12" for="Sal">Sal</label>
+            <div class="col-md-4">
+                <input class="form-control" type="text" formControlName="sal">
+            </div>
+            <span class="text-danger" *ngIf="employeeForm.hasError('required', 'sal') && formDir.submitted">
+                Sal is required.
+            </span>
+        </div>
+
+        <div class="form-group row">
+            <label class=" control-label col-md-12" for="Comm">Comm</label>
+            <div class="col-md-4">
+                <input class="form-control" type="text" formControlName="comm">
+            </div>
+            <span class="text-danger" *ngIf="employeeForm.hasError('required', 'comm') && formDir.submitted">
+                Comm is required.
+            </span>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-md-12" for="deptno">Department</label>
+            <div class="col-md-4">
+                <select class="form-control" data-val="true" formControlName="deptno">
+                    <option value="">--Select Department--</option>
+                    <option *ngFor="let dept of deptList"
+                            value={{dept.deptno}}>
+                        {{dept.deptno}}
+                    </option>
+                </select>
+            </div>
+            <span class="text-danger" *ngIf="employeeForm.hasError('required', 'deptno') && formDir.submitted">
+                Department is required
+            </span>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-default">Save</button>
+            <button class="btn" (click)="cancel()">Cancel</button>
+        </div>
+    </form>
+</body>
+</html>

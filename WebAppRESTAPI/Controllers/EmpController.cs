@@ -20,33 +20,33 @@ namespace WebAppRESTAPI.Controllers
             return objemployee.GetAllEmployees();
         }
 
-        //[HttpPost]
-        //[Route("api/Employee/Create")]
-        //public int Create([FromBody] TblEmployee employee)
-        //{
-        //    return objemployee.AddEmployee(employee);
-        //}
+        [HttpPost]
+        [Route("api/Employee/Create")]
+        public int Create([FromBody] Emp employee)
+        {
+            return objemployee.AddEmployee(employee);
+        }
 
-        //[HttpGet]
-        //[Route("api/Employee/Details/{id}")]
-        //public TblEmployee Details(int id)
-        //{
-        //    return objemployee.GetEmployeeData(id);
-        //}
+        [HttpGet]
+        [Route("api/Employee/Details/{id}")]
+        public Emp Details(int id)
+        {
+            return objemployee.GetEmployeeData(id);
+        }
 
-        //[HttpPut]
-        //[Route("api/Employee/Edit")]
-        //public int Edit([FromBody]TblEmployee employee)
-        //{
-        //    return objemployee.UpdateEmployee(employee);
-        //}
+        [HttpPut]
+        [Route("api/Employee/Edit")]
+        public int Edit([FromBody]Emp employee)
+        {
+            return objemployee.UpdateEmployee(employee);
+        }
 
-        //[HttpDelete]
-        //[Route("api/Employee/Delete/{id}")]
-        //public int Delete(int id)
-        //{
-        //    return objemployee.DeleteEmployee(id);
-        //}
+        [HttpDelete]
+        [Route("api/Employee/Delete/{id}")]
+        public int Delete(int id)
+        {
+            return objemployee.DeleteEmployee(id);
+        }
 
         [HttpGet]
         [Route("api/Employee/GetDeptList")]

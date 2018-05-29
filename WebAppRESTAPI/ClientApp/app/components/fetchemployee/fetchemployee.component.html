@@ -26,8 +26,8 @@
             <td>{{ emp.deptno }}</td>
             <td>
             <td>
-                <a [routerLink]="['/employee/edit/', emp.employeeId]">Edit</a> |
-                <a [routerLink]="" (click)="delete(emp.employeeId)">Delete</a>
+                <a [routerLink]="['/employee/edit/', emp.empno]">Edit</a> |
+                <a [routerLink]="" (click)="delete(emp.empno)">Delete</a>
             </td>
         </tr>
     </tbody>
