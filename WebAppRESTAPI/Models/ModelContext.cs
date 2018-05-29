@@ -81,10 +81,10 @@ namespace WebAppRESTAPI.Models
                     .HasColumnName("SAL")
                     .HasColumnType("double");
 
-                entity.HasOne(d => d.DeptnoNavigation)
-                    .WithMany(p => p.Emp)
-                    .HasForeignKey(d => d.Deptno)
-                    .HasConstraintName("FK_DEPTNO");
+                //entity.HasOne(d => d.DeptnoNavigation)
+                //    .WithMany(p => p.Emp)
+                //    .HasForeignKey(d => d.Deptno)
+                //    .HasConstraintName("FK_DEPTNO");
             });
         }
     }

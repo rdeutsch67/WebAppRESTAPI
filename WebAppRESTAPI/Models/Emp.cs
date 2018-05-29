@@ -14,6 +14,6 @@ namespace WebAppRESTAPI.Models
         public double? Comm { get; set; }
         public int? Deptno { get; set; }
 
-        public Dept DeptnoNavigation { get; set; }
+        // public Dept DeptnoNavigation { get; set; }
     }
 }
