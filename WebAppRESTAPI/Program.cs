@@ -16,6 +16,8 @@ namespace WebAppRESTAPI
     {
         public static void Main(string[] args)
         {
+            OracleMonitor myMonitor = new OracleMonitor();
+            myMonitor.IsActive = true;
             BuildWebHost(args).Run();
         }
 
