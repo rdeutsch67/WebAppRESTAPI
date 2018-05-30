@@ -29,6 +29,7 @@ export class EmployeeService {
 
     getEmployees() {
         return this._http.get(this.myAppUrl + 'api/Employee/Index')
+        //return this._http.get(this.myAppUrl + 'api/myselect')
             .map((response: Response) => response.json())
             .catch(this.errorHandler);
     }

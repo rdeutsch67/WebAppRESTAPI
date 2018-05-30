@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebAppRESTAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Devart.Data.Oracle;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -54,5 +55,97 @@ namespace WebAppRESTAPI.Controllers
         {
             return objemployee.GetDepartments();
         }
+
+        [HttpGet]
+        [Route("api/GetEmpList")]
+        //public IEnumerable<Emp> myIndex()
+        //public IEnumerable<Emp> Json(List<Emp> searchresults, object allowGet)
+        public IEnumerable<Emp> Json(List<Emp> searchresults)
+        {            
+            string mySelectQuery = "SELECT empno, ename, job, mgr, hiredate, sal, comm, deptno FROM Emp";
+            OracleConnection myConnection = new OracleConnection(GlobalVar.OraDBConnString);
+            OracleCommand myCommand = new OracleCommand(mySelectQuery, myConnection);
+            myConnection.Open();
+
+            OracleDataReader myReader = myCommand.ExecuteReader();
+            try
+            {
+                //List<Emp> searchresults = new List<Emp>();
+
+                while (myReader.Read())
+                {
+                    Emp sr = new Emp();
+                    sr.Empno = Convert.ToInt32(myReader["Empno"]);
+                    sr.Ename = myReader["Ename"].ToString();
+                    sr.Job   = myReader["Job"].ToString();
+                    if (myReader["Mgr"].GetType() != typeof(DBNull)) { sr.Mgr = Convert.ToInt32(myReader["Mgr"]); }
+                    if (myReader["Hiredate"].GetType() != typeof(DBNull)) { sr.Hiredate = Convert.ToDateTime(myReader["Hiredate"]); }
+                    if (myReader["Sal"].GetType() != typeof(DBNull)) { sr.Sal = Convert.ToDouble(myReader["Sal"]); }
+                    if (myReader["Comm"].GetType() != typeof(DBNull)) { sr.Comm = Convert.ToDouble(myReader["Comm"]); }
+                    if (myReader["Deptno"].GetType() != typeof(DBNull)) { sr.Deptno = Convert.ToInt32(myReader["Deptno"]); }
+
+                    searchresults.Add(sr);
+                }                
+
+                //retrun json result
+                return searchresults;                
+            }
+            finally
+            {
+                // always call Close when done reading.
+                myReader.Close();
+                // always call Close when done reading.
+                myConnection.Close();
+            }
+        }
+
+        [HttpGet]
+        [Route("api/GetEmpDeptList")]
+        public IEnumerable<EmpDept> MyIndex2()
+        //public IEnumerable<Emp> Json(List<EmpDept> searchresEmpDept)
+        {
+            string myConnString = "User Id = scott; Password = tiger; Server = 192.168.60.11; Direct = True; Sid = DB05; ";
+            string mySelectQuery = "SELECT e.empno, e.ename, e.job, e.deptno, d.dname"   
+                                   + " FROM emp e, dept d"
+                                   + " where e.deptno = d.deptno";
+            OracleConnection myConnection = new OracleConnection(GlobalVar.OraDBConnString);
+            OracleCommand myCommand = new OracleCommand(mySelectQuery, myConnection);
+            myConnection.Open();
+
+            OracleDataReader myReader = myCommand.ExecuteReader();
+            try
+            {
+                List<EmpDept> searchresEmpDept = new List<EmpDept>();
+
+                while (myReader.Read())
+                {
+                    EmpDept sr = new EmpDept();
+                    sr.Empno = Convert.ToInt32(myReader["Empno"]);
+                    sr.Ename = myReader["Ename"].ToString();
+                    sr.Job = myReader["Job"].ToString();
+                    sr.Deptno = Convert.ToInt32(myReader["Deptno"]);
+                    sr.Dname = myReader["Dname"].ToString();
+                    
+                    searchresEmpDept.Add(sr);
+
+                }
+
+                //build json result
+                return searchresEmpDept;
+
+            }
+            finally
+            {
+                // always call Close when done reading.
+                myReader.Close();
+                // always call Close when done reading.
+                myConnection.Close();
+            }
+        }
+
+        //private IEnumerable<Emp> Json(List<Emp> searchresults, object allowGet)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

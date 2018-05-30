@@ -14,7 +14,8 @@ namespace WebAppRESTAPI.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseOracle("User Id=scott;Password=tiger;Server=192.168.60.11;Direct=True;Sid=DB05;");
+                //optionsBuilder.UseOracle("User Id=scott;Password=tiger;Server=192.168.60.11;Direct=True;Sid=DB05;");
+                optionsBuilder.UseOracle(GlobalVar.OraDBConnString);
             }
         }
 

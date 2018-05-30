@@ -5,6 +5,7 @@ import { Http } from '@angular/http';
     selector: 'fetchdata',
     templateUrl: './fetchdata.component.html'
 })
+
 export class FetchDataComponent {
     public forecasts: WeatherForecast[];
 
