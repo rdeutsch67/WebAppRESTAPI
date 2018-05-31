@@ -104,7 +104,6 @@ namespace WebAppRESTAPI.Controllers
         public IEnumerable<EmpDept> MyIndex2()
         //public IEnumerable<Emp> Json(List<EmpDept> searchresEmpDept)
         {
-            string myConnString = "User Id = scott; Password = tiger; Server = 192.168.60.11; Direct = True; Sid = DB05; ";
             string mySelectQuery = "SELECT e.empno, e.ename, e.job, e.deptno, d.dname"   
                                    + " FROM emp e, dept d"
                                    + " where e.deptno = d.deptno";
@@ -143,9 +142,26 @@ namespace WebAppRESTAPI.Controllers
             }
         }
 
-        //private IEnumerable<Emp> Json(List<Emp> searchresults, object allowGet)
-        //{
-        //    throw new NotImplementedException();
-        //}
+
+        void ModifyDept()
+        {
+            string myUpdateQuery = "UPDATE DEPT SET LOC='VEGAS' WHERE DEPTNO > 20";
+            OracleConnection myConnection = new OracleConnection(GlobalVar.OraDBConnString);
+            OracleCommand myCommand = new OracleCommand(myUpdateQuery, myConnection);
+            //OracleCommand command = myConnection.CreateCommand();
+            //command.CommandText = "UPDATE DEPT SET LOC='VEGAS' WHERE DEPTNO > 20";myConnection.Open();
+            myConnection.Open();
+
+            // return value of ExecuteNonQuery (i) is the number of rows affected by the command
+            int i = myCommand.ExecuteNonQuery();
+            Console.WriteLine(Environment.NewLine + "Rows in DEPT updated: {0}", i + Environment.NewLine);
+        }
+
+        [HttpPut]
+        [Route("api/updatedeptloc")]
+        public void Put([FromBody]string value)
+        {
+            ModifyDept();
+        }        
     }
 }
