@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using WebAppRESTAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Devart.Data.Oracle;
+using Newtonsoft.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -141,6 +142,41 @@ namespace WebAppRESTAPI.Controllers
                 myConnection.Close();
             }
         }
+
+        //[HttpGet] Code funktioniert nicht wie gewünscht
+        //[Route("api/GetEmpDeptList2")]
+        //public string Test()
+        ////public IEnumerable<Emp> Json(List<EmpDept> searchresEmpDept)
+        //{
+        //    string mySelectQuery = "SELECT e.empno, e.ename, e.job, e.deptno, d.dname"
+        //                           + " FROM emp e, dept d"
+        //                           + " where e.deptno = d.deptno";
+        //    OracleConnection myConnection = new OracleConnection(GlobalVar.OraDBConnString);
+        //    OracleCommand myCommand = new OracleCommand(mySelectQuery, myConnection);
+        //    myConnection.Open();
+
+        //    OracleDataReader myReader = myCommand.ExecuteReader();
+        //    try
+        //    {
+        //        var details = myReader;
+
+        //        // JavaScriptSerializer jss = new JavaScriptSerializer();
+        //        //JsonSerializer jss = new JsonSerializer();
+        //        //JsonConvert.DeserializeObject(jss);
+        //        //jsonDoc = jss.Serialize(details);
+        //        string json = JsonConvert.SerializeObject(details, Formatting.Indented);
+        //        myReader.Close();
+        //        return json;
+
+        //    }
+        //    finally
+        //    {
+        //        // always call Close when done reading.
+        //        myReader.Close();
+        //        // always call Close when done reading.
+        //        myConnection.Close();
+        //    }
+        //}
 
 
         void ModifyDept()
